@@ -1,6 +1,17 @@
 /* body{
     background-color: red;
 } */
+.timepanelHouse{
+    border: 1px solid black;
+}
+
+.buttonpanelHouse{
+    border: 1px solid black;
+}
+
+#timeDisplay{
+    border: 1px solid black;
+}
 
 .timepanel{
     border: 1px solid black;

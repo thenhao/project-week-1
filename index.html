@@ -10,12 +10,31 @@
 </head>
 
 <body>
-    <div class="timepanel"></div>
-    <div class="buttonpanel">
-        <button id="setTime"></button>
-        <button id="startTime"></button>
-        <button id="stopTime"></button>
-        <button id="resetTime"></button>
+    <!--Div class to house the labels for display and input -->
+    <!--Deciding which element to use for the display-->
+    <!--https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input-->
+    <div class="timepanelHouse">
+        <div class="timepanel">
+            <label for="" >minutes</label>
+            <input type="number" id="minutelabel" min="0" max="10" value="0">
+            <label for="">seconds</label>
+            <input type="number" id="secondlabel" min="0" max="30" value="0">
+            <label for="">milliseconds</label>
+            <input type="number" id="millisecondlabel" min="0" max="99" value="0">
+            <textarea name="" id="timeDisplay" cols="30" rows="10"></textarea>
+        </div>
+        
     </div>
+
+    <!--Div class to house the button -->
+    <div class="buttonpanelHouse">
+        <div class="buttonpanel">
+            <button id="setTime" onclick = "calculateSetTime()">Set Time</button>
+            <button id="startTime" onclick = "startTime()">Start Time</button>
+            <button id="stopTime" onclick="stopTime()">Stop Time</button>
+            <button id="resetTime" onclick="resetTime()">Reset Time</button>
+        </div>
+    </div>
+    
 </body>
 </html>
