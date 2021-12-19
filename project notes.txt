@@ -1,0 +1,10 @@
+timer seems to interfere with some printing operations
+ways to display the time is becoming complex
+variables are expanding very quickly, seem to use them once rather than happening a few times
+
+
+use another timer to activate after seconds reach 60 ???
+
+At first i tried to work with a variable passing of values and count from there but it kind of didnt work
+Using array block and calculate the time from there and it had some issues
+Then i tried to use total blocks and find the minute and seconds hand before calculating the time
