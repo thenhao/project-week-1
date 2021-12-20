@@ -8,3 +8,12 @@ use another timer to activate after seconds reach 60 ???
 At first i tried to work with a variable passing of values and count from there but it kind of didnt work
 Using array block and calculate the time from there and it had some issues
 Then i tried to use total blocks and find the minute and seconds hand before calculating the time
+
+
+
+2 timer
+1 for milliseconds
+1 for minutes and seconds
+
+
+To put change colour inside the same if condition as second hand === 60 the program will hang

@@ -5,8 +5,61 @@
     border: 1px solid black;
 }
 
+
+
+.fulltimepaneldisplay{
+    border: 1px solid black;
+}
+
 .buttonpanelHouse{
     border: 1px solid black;
+}
+
+.buttonpanel{
+    border: 1px solid black;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.buttonMiddlePanel{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#setTime{
+    height: 12vh;
+    width: 50vh;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 9vw;
+    margin-right: 20px;
+    padding: 5%;
+}
+#startTime{
+    height: 12vh;
+    width: 50vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#stopTime{
+    height: 12vh;
+    width: 50vh;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#resetTime{
+    height: 12vh;
+    width: 50vh;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 9vw;
+    padding: 5%;
 }
 
 #timeDisplay{
@@ -17,6 +70,54 @@
     border: 1px solid black;
 }
 
-.buttonpanel{
-    border: 1px solid black;
+.semiColon {
+    font-size: 10vh;
 }
+
+
+#thirtysecondtimedisplay{
+    border: 1px solid black;
+    background-color: yellow;
+    width: fit-content;
+    height: fit-content;
+    padding: 3%;
+    margin-left: 32vw;
+    margin-right: 32vw;
+    margin-bottom: 10px;
+}
+
+#formin{
+    font-size: 15vh;
+}
+
+#forsec{
+    font-size: 15vh;
+}
+
+#formili{
+    font-size: 15vh;
+}
+
+
+#fulltimepaneldisplay{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    padding: 3%;
+    margin-left: 35.5vw;
+    margin-right: 35.5vw;
+    margin-bottom: 10px;
+}
+
+#min{
+    font-size: 10vh;
+}
+
+#sec{
+    font-size: 10vh;
+}
+
+#mili{
+    font-size: 10vh;
+}
+

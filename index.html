@@ -19,9 +19,27 @@
             <input type="number" id="minutelabel" min="0" max="10" value="0">
             <label for="">seconds</label>
             <input type="number" id="secondlabel" min="0" max="30" value="0">
-            <label for="">milliseconds</label>
-            <input type="number" id="millisecondlabel" min="0" max="99" value="0">
-            <p id="timeDisplay" ></p>
+            <label for="" id="mil">milliseconds</label>
+            <input type="number" id="millisecondlabel" min="0" max="99" value="0">        
+            
+            <div id="thirtysecondtimedisplay">
+                <label id="formin">milliseconds</label>
+                <label class="semiColon">:</label>
+                <label id="forsec">milliseconds</label>
+                <label class="semiColon">:</label>
+                <label id="formili">milliseconds</label>
+            </div>
+              
+            
+            <div id="fulltimepaneldisplay">
+                <label id="min">milliseconds</label>
+                <label class="semiColon">:</label>
+                <label id="sec">milliseconds</label>
+                <label class="semiColon">:</label>
+                <label id="mili">milliseconds</label>
+            </div>
+            
+
         </div>
         
     </div>
@@ -30,8 +48,12 @@
     <div class="buttonpanelHouse">
         <div class="buttonpanel">
             <button id="setTime" onclick = "calculateSetTime()">Set Time</button>
-            <button id="startTime" onclick = "startTime()">Start Time</button>
-            <button id="stopTime" onclick="stopTime()">Stop Time</button>
+            
+            <div class="buttonMiddlePanel">
+                <button id="startTime" onclick = "startTime()">Start Time</button>
+                <button id="stopTime" onclick="stopTime()">Stop Time</button>
+            </div>
+            
             <button id="resetTime" onclick="resetTime()">Reset Time</button>
         </div>
     </div>
