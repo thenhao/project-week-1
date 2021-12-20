@@ -6,7 +6,7 @@ let secondTime = 0;
 let millisecondTime = 100;
 let minuteTimeOverall = 0;
 let secondTimeOverall = 0;
-let minutePassed = 0;
+let minutePassed = 1;
 // millisecond time ???
 let minuteHand =0;
 let secondHand =0;
@@ -21,7 +21,7 @@ let newLine ="\n";
 //array for number of 30 second block
 let timeBlockArray;
 let counter = 0;
-let currentCount = 0;
+let currentCount = 30;
 //variable for set interval
 let startTimeCounter;
 let startMilliTimeCounter;
@@ -92,7 +92,7 @@ function calculateBlocksOfTime(){
 function startTime(){
     //isClicked variable to check if the button is clicked
     isClicked = true;
-    //another timer for millisecond ? // for nice looking purpose
+    //another timer for millisecond
     startMilliTimeCounter = setInterval(millisecondShow,10);
     startTimeCounter = setInterval(tabathaCount,1000);
 }
@@ -131,7 +131,10 @@ function tabathaCount(){
             //document.getElementById("timeDisplay").innerText = timeBlockArray[counter];
             document.getElementById("forsec").innerText =padZero(defaultSecond);
             clearInterval(startTimeCounter);
+            clearInterval(startMilliTimeCounter);
+            resetTime();
         }else{
+            
             counter--;  
         }
         
@@ -149,13 +152,13 @@ function tabathaCount(){
         //This if condition checks if 1 minute has passed
         if(minuteHand !== 0){
             if(minutePassed === 60){
-            
+                console.log('in here');
                 if(minuteHand === 0){
                     minuteHand=0;
                 }else{
-                    minuteHand--;
+                    //minuteHand--;
                     secondHand = 60;
-                    minutePassed = 0;
+                    minutePassed = 1;
                 } 
             }
         }
@@ -168,15 +171,24 @@ function tabathaCount(){
                 document.getElementById("formili").innerText = padZero(defaultMilisecond);
                 clearInterval(startTimeCounter);
                 clearInterval(startMilliTimeCounter);
+                resetTime();
             }
             else{
                 minuteHand--;
                 secondHand = 60;//59 ? 60
-                minutePassed = 0;
+                //console.log('in 59--2');
+                //console.log('minute Passed is:', minutePassed);
+                //console.log('Second Hand is:', secondHand);
+                minutePassed = 1;
+                //console.log('passed here');
+                
             }
+
+            
         }else if(secondHand === 60){//This if condition checks for the transition to countdown from start or countdown when going over a minute
             minuteHand--;
             secondHand--;
+            //document.getElementById("forsec").innerText =padZero(timeBlockArray[counter]);
             timeBlockArray[counter]--;
             
         }
@@ -186,8 +198,10 @@ function tabathaCount(){
         //condition added for display of correctness and else clause functions just normally
         if(secondHand === 60){
             //printing by label
-            document.getElementById("min").innerText = (minuteHand+1);
-            document.getElementById("sec").innerText = padZero(defaultSecond);      
+            document.getElementById("min").innerText = padZero(minuteHand);
+            //document.getElementById("sec").innerText = padZero(defaultSecond);
+            
+            document.getElementById("sec").innerText = padZero(secondHand);      
         }else{
             
             document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);
@@ -207,6 +221,7 @@ function tabathaCount(){
 
         currentCount =timeBlockArray[counter];
         timeBlockArray[counter]--;
+        
         secondHand--;
         minutePassed++;
         
@@ -227,7 +242,7 @@ function stopTime(){
 
 function resetTime(){
     isClicked = false;
-    minutePassed = 0;
+    minutePassed = 1;
     document.getElementById("minutelabel").value=defaultMinute;
     document.getElementById("secondlabel").value=defaultSecond;
     

@@ -1,9 +1,7 @@
 /* body{
     background-color: red;
 } */
-.timepanelHouse{
-    border: 1px solid black;
-}
+
 
 
 
@@ -66,8 +64,18 @@
     border: 1px solid black;
 }
 
+.timepanelHouse{
+    border: 1px solid black;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .timepanel{
     border: 1px solid black;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .semiColon {
@@ -80,11 +88,11 @@
     background-color: yellow;
     width: fit-content;
     height: fit-content;
-    padding: 3%;
+    /* padding: 3%;
     margin-left: 32vw;
     margin-right: 32vw;
-    margin-bottom: 10px;
-}
+    margin-bottom: 10px;*/
+} 
 
 #formin{
     font-size: 15vh;
@@ -103,9 +111,9 @@
     border: 1px solid black;
     width: fit-content;
     height: fit-content;
-    padding: 3%;
+    /* padding: 3%;
     margin-left: 35.5vw;
-    margin-right: 35.5vw;
+    margin-right: 35.5vw; */
     margin-bottom: 10px;
 }
 

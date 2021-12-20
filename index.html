@@ -14,14 +14,17 @@
     <!--Deciding which element to use for the display-->
     <!--https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input-->
     <div class="timepanelHouse">
-        <div class="timepanel">
+        <div class="settingsPanel">
             <label for="" >minutes</label>
             <input type="number" id="minutelabel" min="0" max="10" value="0">
             <label for="">seconds</label>
             <input type="number" id="secondlabel" min="0" max="30" value="0">
             <label for="" id="mil">milliseconds</label>
-            <input type="number" id="millisecondlabel" min="0" max="99" value="0">        
-            
+            <input type="number" id="millisecondlabel" min="0" max="99" value="0">
+        </div>
+        
+        
+        <div class="timepanel"> 
             <div id="thirtysecondtimedisplay">
                 <label id="formin">milliseconds</label>
                 <label class="semiColon">:</label>
@@ -38,8 +41,6 @@
                 <label class="semiColon">:</label>
                 <label id="mili">milliseconds</label>
             </div>
-            
-
         </div>
         
     </div>
