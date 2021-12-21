@@ -19,6 +19,7 @@ const defaultIntervalCounter = 30;
 //array to check for 3,2,1 transition
 //3 second as the beep last for 4 counts so it transit to next block
 const countdownSound = [3,33];
+const transitionSound = [13,43];
 //array to store rest and work period timing
 const workPeriod = [0,30,60];
 const restPeriod = [10,40];
@@ -61,7 +62,17 @@ function calculateSetTime(){
     
      calculateBlocksOfTime();
 
-
+     //After calculating the blocks and the seconds needed we need to update the label to print correct time
+     document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);
+            
+     //printing by label
+     document.getElementById("min").innerText = padZero(minuteHand);
+     if(secondHand === 60){
+        document.getElementById("sec").innerText = padZero(defaultSecond);
+     }else{
+        document.getElementById("sec").innerText = padZero(secondHand);
+     }
+     
 
 }
 
@@ -84,8 +95,6 @@ function calculateBlocksOfTime(){
     }
     console.log(timeBlockArray);
     counter = timeBlockArray.length-1;
-    //secondTimeOverall = timeBlockArray[counter] + timeBlockArray[counter-1];
-    //minuteTimeOverall = minuteTime/60;
 
     //minutehand varaiable to calculate the minutes based on the array block
     minuteHand = parseInt(timeBlockArray.length/2);
@@ -98,6 +107,8 @@ function calculateBlocksOfTime(){
     }else{
         secondHand = 60;//60;
     }
+
+
 }
 
 function startTime(){
@@ -144,6 +155,8 @@ function tabathaCount(){
             document.getElementById("forsec").innerText =padZero(defaultSecond);
             clearInterval(startTimeCounter);
             clearInterval(startMilliTimeCounter);
+            audio.src = './Sound/clockover.mp3';
+            audio.play();
             resetTime();
         }else{
             
@@ -255,7 +268,13 @@ function tabathaCount(){
 
         //This section checks for the counter when it has 3 seconds left and plays a beep
         
-        if(countdownSound.includes(secondHand)){
+        if(countdownSound.includes(secondHand)){    
+            audio.src = './Sound/321go.mp3';
+            audio.play();
+        }
+
+        if(transitionSound.includes(secondHand)){
+            audio.src = './Sound/beep-sound.wav';
             audio.play();
         }
 
@@ -289,10 +308,13 @@ function resetTime(){
     minutePassed = 0;
     
    
-    document.getElementById("minutelabel").value=defaultMinute;
+    document.getElementById("minutelabel").value=1;//defaultMinute;
     document.getElementById("secondlabel").value=defaultSecond;
     
-    initialTime();
+    //initialTime();
+
+    minuteHand = defaultMinute;
+    customSetTime = defaultMinute*60;
 
     calculateBlocksOfTime();
     
