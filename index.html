@@ -23,12 +23,12 @@
             <input type="number" id="minutelabel" min="0" max="10" value="0">
             <label for="">seconds</label>
             <input type="number" id="secondlabel" min="0" max="30" value="0">
-            <label for="" id="mil">milliseconds</label>
-            <input type="number" id="millisecondlabel" min="0" max="99" value="0">
         </div>
         
         
         <div class="timepanel"> 
+            
+
             <div id="thirtysecondtimedisplay">
                 <label id="formin">milliseconds</label>
                 <label class="semiColon">:</label>
@@ -37,13 +37,20 @@
                 <label id="formili">milliseconds</label>
             </div>
               
-            
+            <div id="Increasetimebuttons">
+                <button id="incMin" onclick = "increaseMinute()"></button>
+                <button id="incSec" onclick = "increaseSeconds()"></button>
+            </div>
             <div id="fulltimepaneldisplay">
                 <label id="min">milliseconds</label>
                 <label class="semiColon">:</label>
                 <label id="sec">milliseconds</label>
                 <label class="semiColon">:</label>
                 <label id="mili">milliseconds</label>
+            </div>
+            <div id="decreasetimebuttons">
+                <button id="decMin" onclick = "decreaseMinute()"></button>
+                <button id="decSec" onclick = "decreaseSeconds()"></button>
             </div>
         </div>
         

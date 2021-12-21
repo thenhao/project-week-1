@@ -9,8 +9,9 @@ Signal for 20:10
 -notes: sometimes the timing dont jump
 -experiment with it more
 -latest: solved
+-done
 
-class for all the variables used with getters and setters
+
 
 sound for start and rest and transition
 -using audio element
@@ -25,3 +26,9 @@ https://stackoverflow.com/questions/35299053/play-one-html-audio-file-at-a-time-
 -----------------------------------------------------------------------------------------------------------------------------
 maybe can use async function with await for millisecond to minute and second
 then the promise is created at which section ? TBC
+
+class for all the variables used with getters and setters
+
+button to increase time or decrease time
+
+side bar to put input to set time ?

@@ -34,6 +34,8 @@ let startMilliTimeCounter;
 //variable for button clicked or not
 let isClicked = false;
 let started = true;
+//to control increasing time
+let state = true;
 
 //create audio object here
 let audio = new Audio('./Sound/beep-sound.wav');
@@ -155,8 +157,6 @@ function tabathaCount(){
             document.getElementById("forsec").innerText =padZero(defaultSecond);
             clearInterval(startTimeCounter);
             clearInterval(startMilliTimeCounter);
-            audio.src = './Sound/clockover.mp3';
-            audio.play();
             resetTime();
         }else{
             
@@ -202,6 +202,8 @@ function tabathaCount(){
                 document.getElementById("formili").innerText = padZero(defaultMilisecond);
                 clearInterval(startTimeCounter);
                 clearInterval(startMilliTimeCounter);
+                audio.src = './Sound/clockover.mp3';
+                audio.play();
                 resetTime();
             }
             else{
@@ -305,6 +307,7 @@ function stopTime(){
 function resetTime(){
     isClicked = false;
     started = true;
+    state = true;
     minutePassed = 0;
     
    
@@ -314,10 +317,12 @@ function resetTime(){
     //initialTime();
 
     minuteHand = defaultMinute;
+    secondHand = defaultSecond;
     customSetTime = defaultMinute*60;
 
     calculateBlocksOfTime();
-    
+    console.log('The time set is:',customSetTime);
+
     clearInterval(startTimeCounter);
     clearInterval(startMilliTimeCounter);
 
@@ -339,5 +344,100 @@ function resetTime(){
 function padZero(number){
     let  str = number.toString();
     return str.padStart(2, "0");
+}
+
+
+function increaseMinute(){
+    //this function increases the minutehand value
+    minuteHand++;
+    showTime();
+}
+
+function increaseSeconds(){
+    
+    //this if is to catch the initial value as there is default value set
+    if(secondHand === 60){
+        if(state){
+            //minuteHand++;
+            secondHand =0;
+            state = false;
+            secondHand+=30;
+            console.log('in exception here');
+        }else{
+            minuteHand++;
+            secondHand = 0;
+            console.log('in here');
+        }
+    }else{//else if its not inital default value add the seconds in to tabulate whether it crosses a minute
+        //if it does then reset the counter to zero
+        secondHand+=30;
+        if(secondHand === 60){
+            minuteHand++;
+            secondHand = 0;
+        }
+    }   
+    console.log(secondHand);
+    showTime();
+}
+
+function decreaseMinute(){
+    //this if else clause checks the minutehand and decrease it if it is no 0
+    if(minuteHand === 0){
+        minuteHand = 0;
+        secondHand = 0;
+    }else{
+        minuteHand--;
+    }
+    
+    showTime();
+}
+
+function decreaseSeconds(){
+ 
+    //This if else clause checks if the second hand is equal to 0 
+    //if the second hand is equal to 0, we check if the minute hand is not equal 0
+    //if it is not equal to 0, we minus the value of minute hand and reset the second hand counter
+    if(secondHand === 0){
+
+        if(minuteHand !== 0){
+            minuteHand--;
+            secondHand =60;
+        }
+
+    }else if(secondHand === 60){
+        if(minuteHand === 0){
+            minuteHand = 0;
+            secondHand = 0;
+        }else{
+            minuteHand--;
+        } 
+    }
+
+    if(secondHand === 0 && minuteHand === 0){
+        minuteHand =0;
+        secondHand = 0;
+    }else{
+        secondHand-=30;
+    }
+    
+    
+    showTime();
+}
+
+function showTime(){
+    if(secondHand === 60){
+        //printing by label
+        document.getElementById("min").innerText = padZero(minuteHand);
+        document.getElementById("sec").innerText = padZero(defaultSecond);
+         
+        document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);  
+    }else{
+        
+        document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);
+        
+        //printing by label
+        document.getElementById("min").innerText = padZero(minuteHand);
+        document.getElementById("sec").innerText = padZero(secondHand);            
+    } 
 }
 
