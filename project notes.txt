@@ -24,3 +24,8 @@ Confusion as one count up while the other count down. The other count down to 0 
 to do other things
 
 when troubleshooting, should put console.log at stages where the variable is accessed so that can filter through each section
+
+Had issues again with the counter and found out that there was too much checking and mismatch in the displaying and counting of the time
+cleaned up the code again and ensure that im using only seconds to count and ensure that the data takes reference from one point
+
+favicon error pops out and seems to interfere with the sound

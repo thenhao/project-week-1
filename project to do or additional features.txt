@@ -1,0 +1,27 @@
+millisecond countdown section--done
+
+what element to properly display the time and inputs ?
+-using labels
+-done
+
+Signal for 20:10
+-done 
+-notes: sometimes the timing dont jump
+-experiment with it more
+-latest: solved
+
+class for all the variables used with getters and setters
+
+sound for start and rest and transition
+-using audio element
+https://stackoverflow.com/questions/9419263/how-to-play-audio
+https://www.w3schools.com/jsref/met_audio_play.asp
+https://www.w3schools.com/jsref/dom_obj_audio.asp
+-code using audio object
+-find the sound effect for fourze, faiz, build, kabuto,decade
+-i can have 1 audio object and change the src to change different audio
+https://stackoverflow.com/questions/35299053/play-one-html-audio-file-at-a-time-with-javascript-jquery/35299235
+--seems to automatically end
+-----------------------------------------------------------------------------------------------------------------------------
+maybe can use async function with await for millisecond to minute and second
+then the promise is created at which section ? TBC

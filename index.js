@@ -4,10 +4,10 @@ let customSetTime = 0;
 let minuteTime = 0;
 let secondTime = 0;
 let millisecondTime = 100;
-let minuteTimeOverall = 0;
-let secondTimeOverall = 0;
-let minutePassed = 1;
-// millisecond time ???
+//let minuteTimeOverall = 0;
+//let secondTimeOverall = 0;
+let minutePassed = 0;
+
 let minuteHand =0;
 let secondHand =0;
 
@@ -16,8 +16,13 @@ const defaultMinute = 4;
 const defaultSecond = 0;
 const defaultMilisecond = 0;
 const defaultIntervalCounter = 30;
-//variable for new line
-let newLine ="\n";
+//array to check for 3,2,1 transition
+//3 second as the beep last for 4 counts so it transit to next block
+const countdownSound = [3,33];
+//array to store rest and work period timing
+const workPeriod = [0,30,60];
+const restPeriod = [10,40];
+
 //array for number of 30 second block
 let timeBlockArray;
 let counter = 0;
@@ -27,9 +32,14 @@ let startTimeCounter;
 let startMilliTimeCounter;
 //variable for button clicked or not
 let isClicked = false;
-let started = false;
+let started = true;
+
+//create audio object here
+let audio = new Audio('./Sound/beep-sound.wav');
 
 
+
+//default start up settings
 document.getElementById("min").innerText = padZero(defaultMinute);
 document.getElementById("sec").innerText = padZero(defaultSecond);
 document.getElementById("mili").innerText = padZero(defaultMilisecond);
@@ -74,23 +84,25 @@ function calculateBlocksOfTime(){
     }
     console.log(timeBlockArray);
     counter = timeBlockArray.length-1;
-    secondTimeOverall = timeBlockArray[counter] + timeBlockArray[counter-1];
-    minuteTimeOverall = minuteTime/60;
+    //secondTimeOverall = timeBlockArray[counter] + timeBlockArray[counter-1];
+    //minuteTimeOverall = minuteTime/60;
 
     //minutehand varaiable to calculate the minutes based on the array block
     minuteHand = parseInt(timeBlockArray.length/2);
     //mod it for remainder to get the seconds portion
     secondHand = timeBlockArray.length % 2;
     console.log(secondHand);
+    console.log(started);
     if(timeBlockArray.length % 2 > 0){
-        secondHand = 30;
+        secondHand = 30;//30;
     }else{
-        secondHand = 60;
+        secondHand = 60;//60;
     }
 }
 
 function startTime(){
     //isClicked variable to check if the button is clicked
+    //testing audio.play();
     isClicked = true;
     //another timer for millisecond
     startMilliTimeCounter = setInterval(millisecondShow,10);
@@ -150,21 +162,27 @@ function tabathaCount(){
     if(isClicked)
     {
         //This if condition checks if 1 minute has passed
-        if(minuteHand !== 0){
-            if(minutePassed === 60){
-                console.log('in here');
-                if(minuteHand === 0){
-                    minuteHand=0;
-                }else{
-                    //minuteHand--;
-                    secondHand = 60;
-                    minutePassed = 1;
-                } 
-            }
-        }
+        // if(minuteHand !== 0){
+        //     if(minutePassed === 60){
+        //         //console.log('in here');
+        //         if(minuteHand === 0){
+        //             minuteHand=0;
+        //         }else{
+        //             //console.log('in here');
+        //             minuteHand--;
+        //             secondHand = 60;
+        //             minutePassed = 0;
+        //         } 
+        //     }
+        // }
         
         //This if condition checks if the seconds has counted down to zero
-        if(secondHand === 0){
+        //if reach 0 then reset the countdown second clock back to 60
+        //if reach 60 set the count up minute variable to 0;
+
+        if(secondHand === 0){  
+            
+            //This if condition checks if minute and seconds equals to 0. means Timer has ended
             if(minuteHand === 0){
                 //end as minute =0 and seconds = 0
                 document.getElementById("mili").innerText = padZero(defaultMilisecond);
@@ -174,34 +192,49 @@ function tabathaCount(){
                 resetTime();
             }
             else{
-                minuteHand--;
-                secondHand = 60;//59 ? 60
-                //console.log('in 59--2');
-                //console.log('minute Passed is:', minutePassed);
-                //console.log('Second Hand is:', secondHand);
-                minutePassed = 1;
+                //This else clause resets the second counter back to 60 after it reaches 0
+                //resets the minute counter back to 0 after it reaches 60
+                //might not even need minutepassed
+                //minuteHand--;
+                secondHand = 60;
+
+                minutePassed = 0;
                 //console.log('passed here');
                 
             }
 
             
-        }else if(secondHand === 60){//This if condition checks for the transition to countdown from start or countdown when going over a minute
-            minuteHand--;
-            secondHand--;
-            //document.getElementById("forsec").innerText =padZero(timeBlockArray[counter]);
-            timeBlockArray[counter]--;
-            
+        }else if(secondHand === 60){//This if condition checks for the moment we press start
+            //Once we know that it has started, let the interval go through the other conditions and ignore this
+            //console.log('entered');
+            if(started){
+                minuteHand--;
+                secondHand--;
+
+                timeBlockArray[counter]--;
+                started = false;
+                //console.log('in if block');
+                //console.log(secondHand);
+            }
+            // else{
+            //     console.log('in else block');
+            //     console.log(secondHand);
+            // }
+               
         }
 
-        //This section displays the code before doing countdown work and countup tracking work
-        //Added this if condition again to catch the 0 second anomaly
-        //condition added for display of correctness and else clause functions just normally
+        //This section of if else clause checks if the second counter has been reset to 60 and display the correct
+        //format of time. It then correct the minutehand as 1 minute has passed by decreasing it by 1
+        //When second counter is not reset to 60, we display the time as per normal for the minute and second
+        //30 second countdown counter and the total minute and seconds left
+
         if(secondHand === 60){
             //printing by label
             document.getElementById("min").innerText = padZero(minuteHand);
-            //document.getElementById("sec").innerText = padZero(defaultSecond);
-            
-            document.getElementById("sec").innerText = padZero(secondHand);      
+            document.getElementById("sec").innerText = padZero(defaultSecond);
+             
+            document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);  
+            minuteHand--; 
         }else{
             
             document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);
@@ -211,22 +244,32 @@ function tabathaCount(){
             document.getElementById("sec").innerText = padZero(secondHand);            
         }
 
-        //condition to check for changing colour
-        //maybe can use array.includes here
-        if(secondHand ===0 ||secondHand ===30 || secondHand ===60) {
+        //This section of if else is to check the timing block
+        //if it is in the working range, display yellow and if it is in the rest range, display red
+        //Using array.includes here to check if the timing exist in the array
+        if(workPeriod.includes(secondHand)) {
             document.getElementById("thirtysecondtimedisplay").style.backgroundColor = 'yellow';
-        }else if(secondHand === 10 || secondHand ===40){
+        }else if(restPeriod.includes(secondHand)){
             document.getElementById("thirtysecondtimedisplay").style.backgroundColor = 'red';
         }
 
+        //This section checks for the counter when it has 3 seconds left and plays a beep
+        
+        if(countdownSound.includes(secondHand)){
+            audio.play();
+        }
+
+        //This tracks the current count
+        //in the event the stop button is pressed, we have a record
         currentCount =timeBlockArray[counter];
+        //This count down the 30 second block
         timeBlockArray[counter]--;
-        
+        //console.log(minutePassed);
+        console.log(secondHand, minutePassed, secondHand+minutePassed);
+        //counter for second countdown and minute count up
+        //might not even need minutepassed
         secondHand--;
-        minutePassed++;
-        
-        console.log(minutePassed);
-        
+        minutePassed++;     
     }
         
 }
@@ -242,7 +285,10 @@ function stopTime(){
 
 function resetTime(){
     isClicked = false;
-    minutePassed = 1;
+    started = true;
+    minutePassed = 0;
+    
+   
     document.getElementById("minutelabel").value=defaultMinute;
     document.getElementById("secondlabel").value=defaultSecond;
     
