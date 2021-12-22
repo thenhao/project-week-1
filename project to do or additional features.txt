@@ -32,3 +32,13 @@ class for all the variables used with getters and setters
 button to increase time or decrease time
 
 side bar to put input to set time ?
+
+
+button image:
+https://stackoverflow.com/questions/8683528/embed-image-in-a-button-element
+puttting the image tag inside the button tag
+-image cant change and hover seems to have an issue
+-seems to solve with mouseover and mouseout
+https://www.w3schools.com/jsref/dom_obj_event.asp
+
+when time is increased with the button is the array block calculated ???

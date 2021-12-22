@@ -17,18 +17,14 @@
     <!--Div class to house the labels for display and input -->
     <!--Deciding which element to use for the display-->
     <!--https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input-->
-    <div class="timepanelHouse">
-        <div class="settingsPanel">
-            <label for="" >minutes</label>
-            <input type="number" id="minutelabel" min="0" max="10" value="0">
-            <label for="">seconds</label>
-            <input type="number" id="secondlabel" min="0" max="30" value="0">
-        </div>
-        
-        
-        <div class="timepanel"> 
-            
+    <div class="leftcolumn"></div>
+    <div class="rightcolumn"></div>
 
+    <div class="timepanelHouse">
+        
+        <h1 id="thirtysecondheader">Countdown</h1>
+
+        <div class="timepanel"> 
             <div id="thirtysecondtimedisplay">
                 <label id="formin">milliseconds</label>
                 <label class="semiColon">:</label>
@@ -36,30 +32,63 @@
                 <label class="semiColon">:</label>
                 <label id="formili">milliseconds</label>
             </div>
-              
-            <div id="Increasetimebuttons">
-                <button id="incMin" onclick = "increaseMinute()"></button>
-                <button id="incSec" onclick = "increaseSeconds()"></button>
+
+            <div class="combine">
+                
+                
+                
+                <div class="combinebuttonanddisplay">
+                    
+
+                    <div id="Increasetimebuttons">
+                        
+                        <button id="incMin" onclick = "increaseMinute()"><img src="./Pictures/up arrow.png" alt="up arrow" class="arrow" id="uparrowmin"></button>
+                        <button id="incSec" onclick = "increaseSeconds()"><img src="./Pictures/up arrow.png" alt="up arrow" class="arrow" id="uparrowsec"></button>
+                    </div>
+    
+                    <div class="totaltimerow">
+                        
+                        
+                        <div id="fulltimepaneldisplay"> 
+                            <h1 id="totaltimeheader">Total Time:</h1>
+                            <label id="min">milliseconds</label>
+                            <label class="totaltimesemiColon">:</label>
+                            <label id="sec">milliseconds</label>
+                            <label class="totaltimesemiColon">:</label>
+                            <label id="mili">milliseconds</label>
+                        </div>
+                    </div>
+                    
+    
+                    <div id="decreasetimebuttons">
+                        <button id="decMin" onclick = "decreaseMinute()"><img src="./Pictures/down arrow.png" alt="down arrow" class="arrow" id="downarrowmin"></button>
+                        <button id="decSec" onclick = "decreaseSeconds()"><img src="./Pictures/down arrow.png" alt="down arrow" class="arrow" id="downarrowsec"></button>
+                    </div>
+
+                </div>
+                
             </div>
-            <div id="fulltimepaneldisplay">
-                <label id="min">milliseconds</label>
-                <label class="semiColon">:</label>
-                <label id="sec">milliseconds</label>
-                <label class="semiColon">:</label>
-                <label id="mili">milliseconds</label>
-            </div>
-            <div id="decreasetimebuttons">
-                <button id="decMin" onclick = "decreaseMinute()"></button>
-                <button id="decSec" onclick = "decreaseSeconds()"></button>
-            </div>
+            
         </div>
+        
         
     </div>
 
     <!--Div class to house the button -->
     <div class="buttonpanelHouse">
         <div class="buttonpanel">
-            <button id="setTime" onclick = "calculateSetTime()">Set Time</button>
+
+            <div class="setup">
+                <div class="settingsPanel">
+                    <label for="" >Key in the minutes</label>
+                    <input type="number" id="minutelabel" min="0" max="10" value="0">
+                    <label for="">Key in the seconds</label>
+                    <input type="number" id="secondlabel" min="0" max="30" value="0">
+                </div>
+                
+                <button id="setTime" onclick = "calculateSetTime()">Set Time</button>
+            </div>
+            
             
             <div class="buttonMiddlePanel">
                 <button id="startTime" onclick = "startTime()">Start Time</button>

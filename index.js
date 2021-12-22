@@ -40,7 +40,8 @@ let state = true;
 //create audio object here
 let audio = new Audio('./Sound/beep-sound.wav');
 
-
+ 
+// document.getElementsByClassName('arrow').addEventListener(unhover, unhover(element));
 
 //default start up settings
 document.getElementById("min").innerText = padZero(defaultMinute);
@@ -53,6 +54,17 @@ document.getElementById("formili").innerText = padZero(defaultMilisecond);
 
 resetTime();
 
+//for picture change effect
+document.getElementById("uparrowmin").addEventListener('mouseover',hoverIncreaseMin);
+document.getElementById("uparrowmin").addEventListener('mouseleave',unhoverIncreaseMin);
+document.getElementById("uparrowsec").addEventListener('mouseover',hoverIncreaseSec);
+document.getElementById("uparrowsec").addEventListener('mouseleave',unhoverIncreaseSec);
+
+document.getElementById("downarrowmin").addEventListener('mouseover',hoverDecreaseMin);
+document.getElementById("downarrowmin").addEventListener('mouseleave',unhoverDecreaseMin);
+document.getElementById("downarrowsec").addEventListener('mouseover',hoverDecreaseSec);
+document.getElementById("downarrowsec").addEventListener('mouseleave',unhoverDecreaseSec);
+
 function calculateSetTime(){
     //console.log to troubleshoot showing can get value in
     //console.log(typeof (document.getElementById("minutelabel").value));
@@ -61,14 +73,18 @@ function calculateSetTime(){
     initialTime();
 
     //set the string in place
-    
-     calculateBlocksOfTime();
+    // if(minuteTime !==0 || secondTime !==0){
+    //     calculateBlocksOfTime();
+    // }
+    calculateBlocksOfTime();
 
      //After calculating the blocks and the seconds needed we need to update the label to print correct time
      document.getElementById("forsec").innerText = padZero(timeBlockArray[counter]);
             
      //printing by label
      document.getElementById("min").innerText = padZero(minuteHand);
+     document.getElementById("mili").innerText = padZero(defaultMilisecond);
+     document.getElementById("formili").innerText = padZero(defaultMilisecond);
      if(secondHand === 60){
         document.getElementById("sec").innerText = padZero(defaultSecond);
      }else{
@@ -79,37 +95,84 @@ function calculateSetTime(){
 }
 
 function initialTime(){
-    minuteTime = parseInt(document.getElementById("minutelabel").value) * 60;
-    secondTime = parseInt(document.getElementById("secondlabel").value);
+    // minuteTime = parseInt(document.getElementById("minutelabel").value) * 60;
+    // secondTime = parseInt(document.getElementById("secondlabel").value);
+
+    minuteHand = parseInt(document.getElementById("minutelabel").value) * 60;
+    secondHand = parseInt(document.getElementById("secondlabel").value);
     
-    customSetTime = minuteTime+secondTime;
+    // customSetTime = minuteTime+secondTime;
+    customSetTime = minuteHand+secondHand;
     console.log('The time set is:',minuteTime+secondTime);
 }
 
 function calculateBlocksOfTime(){
+    
+    // if(minuteTime ===0 && secondTime === 0 ){
+    //     customSetTime = minuteHand+secondHand;
+    // }else{
+    //     customSetTime = minuteTime+secondTime;
+    // }
+    
     //set the counting block
-    thirtySecondBlock = customSetTime/30;
-    timeBlockArray = new Array(thirtySecondBlock);
-    //troubleshooting for number of blocks
-    //console.log(timeBlockArray);
-    for(let i =0; i<timeBlockArray.length; i++){
-        timeBlockArray[i] = 30;
-    }
-    console.log(timeBlockArray);
-    counter = timeBlockArray.length-1;
+    // thirtySecondBlock = customSetTime/30;
+    // timeBlockArray = new Array(thirtySecondBlock);
+    // //troubleshooting for number of blocks
+    // //console.log(timeBlockArray);
+    // for(let i =0; i<timeBlockArray.length; i++){
+    //     timeBlockArray[i] = 30;
+    // }
+    // console.log(timeBlockArray);
+    // counter = timeBlockArray.length-1;
 
-    //minutehand varaiable to calculate the minutes based on the array block
-    minuteHand = parseInt(timeBlockArray.length/2);
-    //mod it for remainder to get the seconds portion
-    secondHand = timeBlockArray.length % 2;
-    console.log(secondHand);
-    console.log(started);
-    if(timeBlockArray.length % 2 > 0){
-        secondHand = 30;//30;
+    // //minutehand varaiable to calculate the minutes based on the array block
+    // minuteHand = parseInt(timeBlockArray.length/2);
+    // //mod it for remainder to get the seconds portion
+    // secondHand = timeBlockArray.length % 2;
+    // console.log(secondHand);
+    // console.log(started);
+    // if(timeBlockArray.length % 2 > 0){
+    //     secondHand = 30;//30;
+    // }else{
+    //     secondHand = 60;//60;
+    // }
+    
+    if(customSetTime ===0){
+        thirtySecondBlock = 0;
+        counter = 0;
+        //document.getElementById("forsec").innerText = padZero(timeBlockArray[0]);
     }else{
-        secondHand = 60;//60;
-    }
+        thirtySecondBlock = customSetTime/30;
+        timeBlockArray = new Array(thirtySecondBlock);
+        //troubleshooting for number of blocks
+        //console.log(timeBlockArray);
+        for(let i =0; i<timeBlockArray.length; i++){
+            timeBlockArray[i] = 30;
+        }
+        console.log(timeBlockArray);
+        counter = timeBlockArray.length-1;
 
+        //minutehand varaiable to calculate the minutes based on the array block
+        minuteHand = parseInt(timeBlockArray.length/2);
+        //mod it for remainder to get the seconds portion
+        secondHand = timeBlockArray.length % 2;
+        console.log(secondHand);
+        console.log(started);
+        if(timeBlockArray.length % 2 > 0){
+            secondHand = 30;//30;
+        }else{
+            secondHand = 60;//60;
+        }
+    }
+    
+    millisecondTime=0;
+
+    isClicked = false;
+    started = true;
+    state = true;
+    clearInterval(startTimeCounter);
+    clearInterval(startMilliTimeCounter);
+    
 
 }
 
@@ -117,6 +180,8 @@ function startTime(){
     //isClicked variable to check if the button is clicked
     //testing audio.play();
     isClicked = true;
+    audio.src = './Sound/beep-start.mp4';
+    audio.play();
     //another timer for millisecond
     startMilliTimeCounter = setInterval(millisecondShow,10);
     startTimeCounter = setInterval(tabathaCount,1000);
@@ -200,11 +265,15 @@ function tabathaCount(){
                 //end as minute =0 and seconds = 0
                 document.getElementById("mili").innerText = padZero(defaultMilisecond);
                 document.getElementById("formili").innerText = padZero(defaultMilisecond);
-                clearInterval(startTimeCounter);
-                clearInterval(startMilliTimeCounter);
+
                 audio.src = './Sound/clockover.mp3';
                 audio.play();
+                
+                // clearInterval(startTimeCounter);
+                // clearInterval(startMilliTimeCounter);
+                
                 resetTime();
+                
             }
             else{
                 //This else clause resets the second counter back to 60 after it reaches 0
@@ -228,6 +297,7 @@ function tabathaCount(){
 
                 timeBlockArray[counter]--;
                 started = false;
+                
                 //console.log('in if block');
                 //console.log(secondHand);
             }
@@ -238,6 +308,10 @@ function tabathaCount(){
                
         }
 
+        // if(minuteHand ===0 && secondHand === 1){
+        //     audio.src = './Sound/clockover.mp3';
+        //     audio.play();
+        // }
         //This section of if else clause checks if the second counter has been reset to 60 and display the correct
         //format of time. It then correct the minutehand as 1 minute has passed by decreasing it by 1
         //When second counter is not reset to 60, we display the time as per normal for the minute and second
@@ -305,13 +379,19 @@ function stopTime(){
 }
 
 function resetTime(){
+    if(!started){
+        audio.src = './Sound/clockover.mp3';
+        audio.play();
+    }
+    
+    document.getElementById("thirtysecondtimedisplay").style.backgroundColor = 'yellow';
     isClicked = false;
     started = true;
     state = true;
     minutePassed = 0;
     
    
-    document.getElementById("minutelabel").value=1;//defaultMinute;
+    document.getElementById("minutelabel").value=defaultSecond;
     document.getElementById("secondlabel").value=defaultSecond;
     
     //initialTime();
@@ -350,7 +430,9 @@ function padZero(number){
 function increaseMinute(){
     //this function increases the minutehand value
     minuteHand++;
+    
     showTime();
+    customSetTime = minuteHand+secondHand;
 }
 
 function increaseSeconds(){
@@ -377,7 +459,9 @@ function increaseSeconds(){
         }
     }   
     console.log(secondHand);
+    
     showTime();
+    customSetTime = minuteHand+secondHand;
 }
 
 function decreaseMinute(){
@@ -390,6 +474,7 @@ function decreaseMinute(){
     }
     
     showTime();
+    customSetTime = minuteHand+secondHand;
 }
 
 function decreaseSeconds(){
@@ -422,6 +507,7 @@ function decreaseSeconds(){
     
     
     showTime();
+    customSetTime = minuteHand+secondHand;
 }
 
 function showTime(){
@@ -440,4 +526,62 @@ function showTime(){
         document.getElementById("sec").innerText = padZero(secondHand);            
     } 
 }
+
+function hoverIncreaseMin() {
+    this.src= './Pictures/uparrowwhite.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("incMin").style.backgroundColor = 'black';
+}
+  
+  function unhoverIncreaseMin() {
+    this.src= './Pictures/up arrow.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("incMin").style.backgroundColor = 'white';
+  }
+
+  function hoverIncreaseSec() {
+    this.src= './Pictures/uparrowwhite.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("incSec").style.backgroundColor = 'black';
+}
+  
+  function unhoverIncreaseSec() {
+    this.src= './Pictures/up arrow.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("incSec").style.backgroundColor = 'white';
+  }
+
+  function hoverDecreaseMin() {
+    this.src= './Pictures/downarrowwhite.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("decMin").style.backgroundColor = 'black';
+}
+  
+  function unhoverDecreaseMin() {
+    this.src= './Pictures/down arrow.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("decMin").style.backgroundColor = 'white';
+  }
+
+  function hoverDecreaseSec() {
+    this.src= './Pictures/downarrowwhite.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("decSec").style.backgroundColor = 'black';
+}
+  
+  function unhoverDecreaseSec() {
+    this.src= './Pictures/down arrow.png';
+    this.width ='4vw';
+    this.height= '4vh';
+    document.getElementById("decSec").style.backgroundColor = 'white';
+  }
+  
+  
 

@@ -8,7 +8,8 @@ This project will be a tabatha timer which will allow the user to input the time
 -set time, start time, stop time, reset time
 
 ### Additional features
--TBC
+-Increase the time using buttons
+-Make the whole counter function as a whole
 
 
 ### overview of plan for 3 areas:
@@ -62,3 +63,30 @@ addeventListener to start time button to start the countdown
 addeventListener to stop time button to pause the countdown
 addeventListener to set time button to fix the total time
 addeventListener to reset time button to reset the time to 0
+
+
+###Citations for project
+sound for start and rest and transition
+-code using audio object
+-using audio element
+https://stackoverflow.com/questions/9419263/how-to-play-audio
+https://www.w3schools.com/jsref/met_audio_play.asp
+https://www.w3schools.com/jsref/dom_obj_audio.asp
+
+
+-Having 1 audio object and change the src to change different audio
+https://stackoverflow.com/questions/35299053/play-one-html-audio-file-at-a-time-with-javascript-jquery/35299235
+
+
+button image:
+-puttting the image tag inside the button tag
+https://stackoverflow.com/questions/8683528/embed-image-in-a-button-element
+
+
+-image cant change and hover seems to have an issue
+-seems to solve with mouseover and mouseout
+https://www.w3schools.com/jsref/dom_obj_event.asp
+
+-Using set interval for timing
+https://www.py4u.net/discuss/276938
+http://sstut.com/javascript/convert-hours-minutes-seconds-to-milliseconds.php
